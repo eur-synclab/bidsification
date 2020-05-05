@@ -1,0 +1,53 @@
+{
+    "options":  {
+          "mri_ext": "PAR",
+          "debug": true,
+          "subject_stem": "sub",
+          "deface": false,
+          "spinoza_data": false,
+          "out_dir": "final"
+        },
+      "mappings": {
+          "bold": "bold",
+          "T1w": "T1mri",
+          "T2w": "T2str"
+        },
+      "metadata": {
+          "MagneticFieldStrength": 3,
+          "InstitutionName": "SYNC lab, Erasmus University, Rotterdam, The Netherlands"
+        },
+      "func": {
+        "gambling-run1": {
+            "id": "btask",
+            "task": "gambling",
+            "run": 1
+          },
+          "gambling-run2":{
+              "id": "btask",
+              "task": "gambling",
+              "run": 2
+            },
+          "gambling-run3": {
+              "id": "btask",
+              "task": "gambling",
+              "run": 3
+          },
+          "gambling-run4":{
+              "id": "btask",
+              "task": "gambling",
+              "run": 4
+          },
+          "task-rest":{
+              "id": "rsfmr",
+              "task": "rest"
+            }
+          },
+        "anat": {
+          "T1": {
+          "id": "T1mri"
+          },
+          "T2": {
+            "id": "T2str"
+          }
+        }
+}
