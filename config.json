@@ -10,38 +10,62 @@
       "mappings": {
           "bold": "bold",
           "T1w": "T1mri",
+          "dwi": "DTI",
+          "phasediff": "Bzero",
           "T2w": "T2str"
         },
       "metadata": {
           "MagneticFieldStrength": 3,
-          "InstitutionName": "SYNC lab, Erasmus University, Rotterdam, The Netherlands"
+          "InstitutionName": "Leiden Consortium on Individual Development, Leiden University, Leiden, The Netherlands"
         },
       "func": {
-        "gambling-run1": {
-            "id": "btask",
-            "task": "gambling",
+        "SNAT-run1": {
+            "id": "SNAT1",
+            "task": "snat",
             "run": 1
           },
-          "gambling-run2":{
-              "id": "btask",
-              "task": "gambling",
+          "SNAT-run2":{
+              "id": "SNAT2",
+              "task": "snat",
               "run": 2
             },
-          "gambling-run3": {
-              "id": "btask",
-              "task": "gambling",
+          "SNAT-run3":{
+              "id": "SNAT3",
+              "task": "snat",
               "run": 3
+            },
+          "PCGex-run1": {
+              "id": "PCGe1",
+              "task": "pcgex",
+              "run": 1
           },
-          "gambling-run4":{
-              "id": "btask",
-              "task": "gambling",
-              "run": 4
+          "PCGex-run2":{
+              "id": "PCGe2",
+              "task": "pcgex",
+              "run": 2
           },
           "task-rest":{
               "id": "rsfmr",
               "task": "rest"
             }
           },
+        "dwi": {
+          "DTIset1": {
+          "id": "DTIap",
+          "acq": "antpost",
+          "run": 1
+          },
+          "DTIset2": {
+          "id": "DTIpa",
+          "acq": "postant",
+          "run": 2
+          } 
+        },
+        "fmap": {
+          "B0":{
+            "id": "Bzero"
+          }
+        },
         "anat": {
           "T1": {
           "id": "T1mri"
