@@ -84,7 +84,7 @@ for i, session in enumerate(raw_sessions):
 
     # Read directory names from raw data foler, write to text file
     for participant in os.listdir(raw_data_dir):
-        if not participant.startswith('.') and if os.path.isdir(os.path.join(raw_data_dir, participant)):
+        if os.path.isdir(os.path.join(raw_data_dir, participant)):
             print(participant)
             f = open(participants_from_dirs_fn,'a+')
             f.write(participant + '\n')
