@@ -1,77 +1,77 @@
 {
-    "options":  {
-          "mri_ext": "PAR",
-          "debug": true,
-          "subject_stem": "sub",
-          "deface": false,
-          "spinoza_data": false,
-          "out_dir": "final"
-        },
-      "mappings": {
-          "bold": "bold",
-          "T1w": "T1mri",
-          "dwi": "DTI",
-          "phasediff": "Bzero",
-          "T2w": "T2str"
-        },
-      "metadata": {
-          "MagneticFieldStrength": 3,
-          "InstitutionName": "Leiden Consortium on Individual Development, Leiden University, Leiden, The Netherlands"
-        },
-      "func": {
-        "SNAT-run1": {
-            "id": "SNAT1",
-            "task": "snat",
-            "run": 1
-          },
-          "SNAT-run2":{
-              "id": "SNAT2",
-              "task": "snat",
-              "run": 2
-            },
-          "SNAT-run3":{
-              "id": "SNAT3",
-              "task": "snat",
-              "run": 3
-            },
-          "PCGex-run1": {
-              "id": "PCGe1",
-              "task": "pcgex",
-              "run": 1
-          },
-          "PCGex-run2":{
-              "id": "PCGe2",
-              "task": "pcgex",
-              "run": 2
-          },
-          "task-rest":{
-              "id": "rsfmr",
-              "task": "rest"
-            }
-          },
-        "dwi": {
-          "DTIset1": {
-          "id": "DTIap",
-          "acq": "antpost",
-          "run": 1
-          },
-          "DTIset2": {
-          "id": "DTIpa",
-          "acq": "postant",
-          "run": 2
-          } 
-        },
-        "fmap": {
-          "B0":{
-            "id": "Bzero"
-          }
-        },
-        "anat": {
-          "T1": {
-          "id": "T1mri"
-          },
-          "T2": {
-            "id": "T2str"
-          }
-        }
+  "options": {
+    "mri_ext": "PAR",
+    "debug": true,
+    "subject_stem": "sub",
+    "deface": false,
+    "spinoza_data": false,
+    "out_dir": "final"
+  },
+  "mappings": {
+    "bold": "bold",
+    "T1w": "T1mri",
+    "dwi": "DTI",
+    "phasediff": "Bzero",
+    "T2w": "T2str"
+  },
+  "metadata": {
+    "MagneticFieldStrength": 3,
+    "InstitutionName": "Leiden Consortium on Individual Development, Leiden University, Leiden, The Netherlands"
+  },
+  "func": {
+    "SNAT-run1": {
+      "id": "SNAT1",
+      "task": "snat",
+      "run": 1
+    },
+    "SNAT-run2": {
+      "id": "SNAT2",
+      "task": "snat",
+      "run": 2
+    },
+    "SNAT-run3": {
+      "id": "SNAT3",
+      "task": "snat",
+      "run": 3
+    },
+    "PCGex-run1": {
+      "id": "PCGe1",
+      "task": "pcgex",
+      "run": 1
+    },
+    "PCGex-run2": {
+      "id": "PCGe2",
+      "task": "pcgex",
+      "run": 2
+    },
+    "task-rest": {
+      "id": "rsfmr",
+      "task": "rest"
+    }
+  },
+  "dwi": {
+    "DTIset1": {
+      "id": "DTIap",
+      "acq": "antpost",
+      "run": 1
+    },
+    "DTIset2": {
+      "id": "DTIpa",
+      "acq": "postant",
+      "run": 2
+    }
+  },
+  "fmap": {
+    "B0": {
+      "id": "Bzero"
+    }
+  },
+  "anat": {
+    "T1": {
+      "id": "T1mri"
+    },
+    "T2": {
+      "id": "T2str"
+    }
+  }
 }

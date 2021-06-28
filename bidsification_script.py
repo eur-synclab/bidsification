@@ -117,7 +117,7 @@ for i, session in enumerate(raw_sessions):
 # STEP 3: run bidsify from command line
 # -------------------------------------
 
-# bidsify -c bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_pseudobids -o /exports/fsw/Bendlab/SamenUniek/test_bidsification
+# bidsify -c bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_pseudobids -o /exports/fsw/Bendlab/SamenUniek/test_bidsification_nonmerge
 
 # -------------------------------------
 # STEP 4: rename T2w to T2star
