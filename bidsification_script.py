@@ -101,8 +101,8 @@ for i, session in enumerate(raw_sessions):
                 os.mkdir(sub_dir)
             # Session-level directory
             session_dir = os.path.join(sub_dir, str(bids_sessions[i]))
-            if not os.path.exists(session_dir):
-                os.mkdir(session_dir)
+            # if not os.path.exists(session_dir):
+            #     os.mkdir(session_dir)
             # Copy renamed raw data to pseudobids directory
             raw_sub_dir = os.path.join(root_dir, session, line)
             shutil.copytree(raw_sub_dir, session_dir)
