@@ -34,5 +34,5 @@ for i, session in enumerate(raw_sessions):
             # print(participant)
             nr_files = len([name for name in os.listdir(participant_dir) if os.path.isfile(os.path.join(participant_dir, name))])
             f = open(participant_info_fn,'a+')
-            f.write(participant + '\t' + nr_files + '\n')
+            f.write(participant + '\t' + str(nr_files) + '\n')
             f.close()
