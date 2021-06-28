@@ -69,7 +69,7 @@ for session in raw_sessions:
 # STEP 2: create BIDS directory structure, copy PAR/REC files
 # --------------------------------
 # Create top-level pseudobids directory
-pseudobids_dir = os.path.join(root_dir, 'pseudobids')
+pseudobids_dir = os.path.join(root_dir, 'test_pseudobids')
 if not os.path.exists(pseudobids_dir):
     os.mkdir(pseudobids_dir)
     
@@ -114,7 +114,7 @@ for i, session in enumerate(raw_sessions):
 # STEP 3: run bidsify from command line
 # -------------------------------------
 
-# bidsify -c /exports/fsw/Bendlab/SamenUniek/SU31_bids/config.json -d /exports/fsw/Bendlab/SamenUniek/SU31_bids/pseudobids
+# bidsify -c /exports/fsw/Bendlab/SamenUniek/SU31_bids/config.json -d /exports/fsw/Bendlab/SamenUniek/test_pseudobids -o /exports/fsw/Bendlab/SamenUniek/test_bidsification
 
 # -------------------------------------
 # STEP 4: rename T2w to T2star
