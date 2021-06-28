@@ -20,7 +20,7 @@ for i, session in enumerate(raw_sessions):
     raw_data_dir = os.path.join(root_dir, session)
 
     # Create log file
-    participant_info_fn = os.path.join(raw_data_dir, 'participant_info.tsv')
+    participant_info_fn = os.path.join(raw_data_dir, 'participant_info.txt')
     # If the text file already exists, delete it
     if os.path.isfile(participant_info_fn):
         os.remove(participant_info_fn)
