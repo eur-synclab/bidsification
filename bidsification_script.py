@@ -97,7 +97,7 @@ for i, session in enumerate(raw_sessions):
             line = line.strip()
             # Subject-level directory
             sub_dir = os.path.join(pseudobids_dir, prefix + str(line[4:10]))
-            if os.path.exists(sub_dir):
+            if not os.path.exists(sub_dir):
                 os.mkdir(sub_dir)
             # Session-level directory
             session_dir = os.path.join(sub_dir, str(bids_sessions[i]))
