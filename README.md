@@ -14,6 +14,9 @@ module add tools/miniconda/python3.8/4.9.2
 
 Then create a new `conda` environment:
 
+(*Note: if you have previously created the conda environment and already installed the packages in the environment, you do not have to repeat that.*
+*You just have to run `conda activate bidsification` and then continue with the instructions in the `Running the code` section below*)
+
 ```
 conda create -n bidsification python=3.8
 ```
