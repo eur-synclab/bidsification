@@ -105,7 +105,10 @@ for i, session in enumerate(raw_sessions):
             #     os.mkdir(session_dir)
             # Copy renamed raw data to pseudobids directory
             raw_sub_dir = os.path.join(root_dir, session, line)
-            shutil.copytree(raw_sub_dir, session_dir)
+            if os.path.exists(session_dir):
+                shutil.copy(raw_sub_dir, session_dir)
+            else:
+                shutil.copytree(raw_sub_dir, session_dir)
 
         participants.close()
 
@@ -119,19 +122,3 @@ for i, session in enumerate(raw_sessions):
 # -------------------------------------
 # STEP 4: rename T2w to T2star
 # -------------------------------------
-
-# for root, directories, filenames in os.walk(bids_dir):
-#     if filenames != []:
-#         for file in filenames:
-#             #extract the file name and path
-#             name = root + '/' + file
-#             name = name.replace("\\", "/")
-#             renameT2 = root + '/' + file[:26] + 'T2star' + file[29:]
- 
-#             if file[26:29] == 'T2w':
-#                 print(name)
-#                 if not os.path.isfile(renameT2):
-#                     print(renameT2)
-#                     os.rename(name, renameT2)
-#                 else:
-#                     print('WARNING: file ' + renameT2 + ' already exists in the folder! This file will therefore be skipped!')
