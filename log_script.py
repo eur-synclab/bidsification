@@ -13,6 +13,8 @@ root_dir = '/exports/fsw/Bendlab/SamenUniek'
 # /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab/SU33100901/ FSL_14_1
 raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
 bids_sessions = ['ses-w03lab', 'ses-w05lab']
+raw_sessions = ['MCC_ses05-lab']
+bids_sessions = ['ses-w05lab']
 file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P']
 new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'Bzero_RS', 'Bzero_1', 'Bzero_2', 'DTIap', 'DTIpa', 'FSLnii', 'log']
 
@@ -60,7 +62,7 @@ for i, session in enumerate(raw_sessions):
                     new_row[-1] = f"WARNING: found {len(fns)} files with pattern {code}.PAR for participant {participant}. Using first one..."
                     print(new_row[-1])
                 elif len(fns) == 0:
-                    new_row[-1] = f"ERROR: found NO files with pattern {code}.PAR for participant {participant}. Ignoring this file code..."
+                    new_row[-1] = f"ERROR: found NO files with pattern {code}.PAR for participant {participant}. Ignoring this file..."
                     print(new_row[-1])
                     continue
 
@@ -74,13 +76,23 @@ for i, session in enumerate(raw_sessions):
                 # Find the first value in the file_type list that exists in protocolline 13 (old identifier)
                 match = next((x for x in file_type if x in line), False)
                 # Find the index in the new_file_type list that corresponds to the match (new identifier)
-                if match == 'B0-map':
+                if not match:
+                    if new_row[-1] is not None:
+                        new_row[-1] = f"{new_row[-1]} | ERROR: no known file type found in ({code}.PAR) file for participant {participant}. Ignoring this file..."
+                    else:
+                        new_row[-1] = f"ERROR: no known file type found in ({code}.PAR) file for participant {participant}. Ignoring this file..."
+                    continue
+                elif match == 'B0-map':
                     if not first_b0_found:
                         first_b0_found = True
                         idx = 10
                     else:
                         idx = 11
-                        new_row[-1] = f"{new_row[-1]} | NOTE: second B0 map found ({code}.PAR) for participant {participant}."
+                        if new_row[-1] is not None:
+                            new_row[-1] = f"{new_row[-1]} | NOTE: second B0 map found ({code}.PAR) for participant {participant}."
+                        else:
+                            new_row[-1] = f"NOTE: second B0 map found ({code}.PAR) for participant {participant}."
+                        
                         print(new_row[-1])
                 else:
                     idx = file_type.index(match)
