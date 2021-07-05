@@ -11,8 +11,8 @@ from pathlib import Path
 root_dir = '/exports/fsw/Bendlab/SamenUniek'
 raw_sessions = ['test_MCC_ses03-lab', 'test_MCC_ses05-lab']
 bids_sessions = ['ses-w03lab', 'ses-w05lab']
-file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map', 'jones30_A', 'jones30_P']
-new_file_type = ['T1mri', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfmr', 'T2str', 'Bzero', 'DTIap', 'DTIpa']
+file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'jones30_A', 'jones30_P']
+new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'Bzero_RS', 'Bzero', 'DTIap', 'DTIpa']
 config_fn = 'bidsification/config.json'
 bids_dir = ''
 

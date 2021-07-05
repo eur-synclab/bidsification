@@ -12,6 +12,7 @@
     "T1w": "T1mri",
     "dwi": "DTI",
     "phasediff": "Bzero",
+    "magnitude1": "",
     "T2w": "T2str"
   },
   "metadata": {
