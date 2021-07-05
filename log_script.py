@@ -95,8 +95,15 @@ for i, session in enumerate(raw_sessions):
                 else:
                     idx = file_type.index(match)
                 new_row[idx+2] = code
+
+            print('New row list:')
+            print(new_row)
             df_new_row = pd.DataFrame([new_row], columns=cols)
+            print('New row df:')
+            print(df_new_row)
             df.append(df_new_row, ignore_index=True)
+            print('New row df appended:')
+            print(df)
         else:
             print('Error: participant directory not found')
     df.to_csv(participant_info_fn, sep='\t')
