@@ -24,9 +24,12 @@ for i, session in enumerate(raw_sessions):
 
     # Create log file
     participant_info_fn = os.path.join(root_dir, session + '_participant_info_extended.tsv')
+    participant_info_fncsv = os.path.join(root_dir, session + '_participant_info_extended.csv')
     # If the text file already exists, delete it
     if os.path.isfile(participant_info_fn):
         os.remove(participant_info_fn)
+    if os.path.isfile(participant_info_fncsv):
+        os.remove(participant_info_fncsv)
     
     cols = ['participant','nr_files'] + new_file_type
     df = pd.DataFrame(columns=cols)
@@ -39,11 +42,10 @@ for i, session in enumerate(raw_sessions):
         if os.path.isdir(participant_dir):
             print(f"{str(p).zfill(3)}: {participant}")
             all_files = [name for name in os.listdir(participant_dir) if os.path.isfile(os.path.join(participant_dir, name))]
-            nr_files = len(all_files)
 
             new_row = [None] * len(cols)
             new_row[0] = participant
-            new_row[1] = len(cols)
+            new_row[1] = len(all_files)
 
             all_codes = [('0' + file[11:-4] if len(file[11:-4]) < 4 else file[11:-4]) for file in all_files]
             all_codes_sorted = sorted(all_codes)
@@ -105,3 +107,4 @@ for i, session in enumerate(raw_sessions):
         else:
             print('Error: participant directory not found')
     df.to_csv(participant_info_fn, sep='\t')
+    df.to_csv(participant_info_fncsv)
