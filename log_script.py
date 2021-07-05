@@ -70,7 +70,7 @@ for i, session in enumerate(raw_sessions):
                 
                 new_row[idx+2] = code
 
-            df_new_row = pd.DataFrame(new_row, columns=cols)
+            df_new_row = pd.DataFrame([new_row], columns=cols)
             df.append(df_new_row, ignore_index=True)
                     
             df.to_csv(participant_info_fn, sep='\t')
