@@ -20,17 +20,15 @@ for i, session in enumerate(raw_sessions):
     raw_data_dir = os.path.join(root_dir, session)
 
     # Create log file
-    participant_info_fn = os.path.join(root_dir, session + '_participant_info.tsv')
+    participant_info_fn = os.path.join(root_dir, session + '_participant_info_extended.tsv')
     # If the text file already exists, delete it
     # if os.path.isfile(participant_info_fn):
     #     os.remove(participant_info_fn)
     
     cols = ['participant','nr_files'] + new_file_type
     df = pd.DataFrame(columns=cols)
-    # df.append(df2, ignore_index=True)
-
+    
     # Read directory names from raw data foler, write to text file
-
     for participant in os.listdir(raw_data_dir):
         participant_dir = os.path.join(raw_data_dir, participant)
         first_b0_found = False
@@ -43,27 +41,35 @@ for i, session in enumerate(raw_sessions):
             new_row[0] = participant
             new_row[1] = len(cols)
 
-            for j, file = enumerate(all_files):
-                if file[-4:] == '.PAR':
-                    code = file[11:-4]
-                    # open and read the protecolline needed for renaming
-                    with open(name, 'r') as f:
-                        protocolline = f.readlines()
-                    
-                    line = protocolline[13]
-                    # Find the first value in the file_type list that exists in protocolline 13 (old identifier)
-                    match = next((x for x in file_type if x in line), False)
-                    # Find the index in the new_file_type list that corresponds to the match (new identifier)
-                    if match == 'B0-map':
-                        if not first_b0_found:
-                            first_b0_found = True
-                            idx = 10
-                        else:
-                            idx = 11
+            all_codes = [('0' + file[11:-4] if len(file[11:-4]) < 4 else file[11:-4]) for file in all_files]
+            all_codes_sorted = sorted(all_codes)
+            all_codes_sorted = list(dict.fromkeys(all_codes_sorted))
+
+            for j, code in enumerate(all_codes_sorted):
+                if code[0] == '0':
+                    code = code[1:]
+                
+                fn = os.path.join(participant_dir, participant + '_' + code + '.PAR')
+
+                # open and read the protecolline needed for renaming
+                with open(name, 'r') as f:
+                    protocolline = f.readlines()
+                
+                line = protocolline[13]
+                # Find the first value in the file_type list that exists in protocolline 13 (old identifier)
+                match = next((x for x in file_type if x in line), False)
+                # Find the index in the new_file_type list that corresponds to the match (new identifier)
+                if match == 'B0-map':
+                    if not first_b0_found: # first check the order of these files ito number e.g. 12_1 vs 4_1
+                        first_b0_found = True
+                        idx = 10
                     else:
-                        idx = file_type.index(match)
-                    
-                    new_row[idx+2] = code
+                        idx = 11
+                else:
+                    idx = file_type.index(match)
+                
+                new_row[idx+2] = code
+
             df_new_row = pd.DataFrame(new_row, columns=cols)
             df.append(df_new_row, ignore_index=True)
                     
