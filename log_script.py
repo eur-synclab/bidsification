@@ -33,8 +33,6 @@ for i, session in enumerate(raw_sessions):
     
     # Read directory names from raw data foler, write to text file
     for p, participant in enumerate(os.listdir(raw_data_dir)):
-        if p == 10:
-            break
         participant_dir = os.path.join(raw_data_dir, participant)
         first_b0_found = False
         fsl_found = False
@@ -96,14 +94,14 @@ for i, session in enumerate(raw_sessions):
                     idx = file_type.index(match)
                 new_row[idx+2] = code
 
-            print('New row list:')
-            print(new_row)
+            # print('New row list:')
+            # print(new_row)
             df_new_row = pd.DataFrame([new_row], columns=cols)
-            print('New row df:')
-            print(df_new_row)
+            # print('New row df:')
+            # print(df_new_row)
             df = df.append(df_new_row, ignore_index=True)
-            print('New row df appended:')
-            print(df)
+            # print('New row df appended:')
+            # print(df)
         else:
             print('Error: participant directory not found')
     df.to_csv(participant_info_fn, sep='\t')
