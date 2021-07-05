@@ -10,11 +10,11 @@ from pathlib import Path
 # -----------------
 
 root_dir = '/exports/fsw/Bendlab/SamenUniek'
-# /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab
+# /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab/SU33100901/ FSL_14_1
 raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
 bids_sessions = ['ses-w03lab', 'ses-w05lab']
-file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P', 'FSLnii']
-new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'Bzero_RS', 'Bzero_1', 'Bzero_2', 'DTIap', 'DTIpa', 'FSLnii']
+file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P']
+new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'Bzero_RS', 'Bzero_1', 'Bzero_2', 'DTIap', 'DTIpa', 'FSLnii', 'log']
 
 for i, session in enumerate(raw_sessions):
     raw_data_dir = os.path.join(root_dir, session)
@@ -35,7 +35,7 @@ for i, session in enumerate(raw_sessions):
         first_b0_found = False
         fsl_found = False
         if os.path.isdir(participant_dir):
-            # print(participant)
+            print(participant)
             all_files = [name for name in os.listdir(participant_dir) if os.path.isfile(os.path.join(participant_dir, name))]
             nr_files = len(all_files)
 
@@ -49,7 +49,7 @@ for i, session in enumerate(raw_sessions):
 
             for j, code in enumerate(all_codes_sorted):
                 if 'FSL' in code:
-                    new_row[-1] = code
+                    new_row[-2] = code
                     continue
                 
                 if code[0] == '0':
@@ -57,9 +57,12 @@ for i, session in enumerate(raw_sessions):
 
                 fns = glob.glob(os.path.join(participant_dir, '*_' + code + '.PAR'))
                 if len(fns) > 1:
-                    print(f"WARNING: found {len(fns)} files with pattern {code}.PAR for participant {participant}. Using first one...")
+                    new_row[-1] = f"WARNING: found {len(fns)} files with pattern {code}.PAR for participant {participant}. Using first one..."
+                    print(new_row[-1])
                 elif len(fns) == 0:
-                    print(f"ERROR: found NO files with pattern {code}.PAR for participant {participant}.")
+                    new_row[-1] = f"ERROR: found NO files with pattern {code}.PAR for participant {participant}. Ignoring this file code..."
+                    print(new_row[-1])
+                    continue
 
                 name = fns[0]
 
@@ -72,11 +75,13 @@ for i, session in enumerate(raw_sessions):
                 match = next((x for x in file_type if x in line), False)
                 # Find the index in the new_file_type list that corresponds to the match (new identifier)
                 if match == 'B0-map':
-                    if not first_b0_found: # first check the order of these files ito number e.g. 12_1 vs 4_1
+                    if not first_b0_found:
                         first_b0_found = True
                         idx = 10
                     else:
                         idx = 11
+                        new_row[-1] += f"| NOTE: second B0 map found ({code}.PAR) for participant {participant}."
+                        print(new_row[-1])
                 else:
                     idx = file_type.index(match)
                 
