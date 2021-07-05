@@ -49,16 +49,16 @@ for i, session in enumerate(raw_sessions):
             for j, code in enumerate(all_codes_sorted):
                 if code[0] == '0':
                     code = code[1:]
-                fns = glob.glob('*_' + code + '.PAR')
+                fns = glob.glob(os.path.join(participant_dir, '*_' + code + '.PAR'))
                 if len(fns) > 1:
                     print(f"WARNING: found {len(fns)} files with pattern {code}.PAR for participant {participant}. Using first one...")
                 elif len(fns) == 0:
                     print(f"ERROR: found NO files with pattern {code}.PAR for participant {participant}.")
 
-                fn = fns[0]
+                name = fns[0]
 
                 # open and read the protecolline needed for renaming
-                with open(fn, 'r') as f:
+                with open(name, 'r') as f:
                     protocolline = f.readlines()
                 
                 line = protocolline[13]
