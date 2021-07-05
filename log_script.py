@@ -52,7 +52,7 @@ for i, session in enumerate(raw_sessions):
                 fn = os.path.join(participant_dir, participant + '_' + code + '.PAR')
 
                 # open and read the protecolline needed for renaming
-                with open(name, 'r') as f:
+                with open(fn, 'r') as f:
                     protocolline = f.readlines()
                 
                 line = protocolline[13]
