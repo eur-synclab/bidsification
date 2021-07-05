@@ -18,6 +18,7 @@ new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1',
 
 for i, session in enumerate(raw_sessions):
     raw_data_dir = os.path.join(root_dir, session)
+    print(raw_data_dir)
 
     # Create log file
     participant_info_fn = os.path.join(root_dir, session + '_participant_info_extended.tsv')
@@ -48,8 +49,13 @@ for i, session in enumerate(raw_sessions):
             for j, code in enumerate(all_codes_sorted):
                 if code[0] == '0':
                     code = code[1:]
-                
-                fn = os.path.join(participant_dir, participant + '_' + code + '.PAR')
+                fns = glob.glob('*_' + code + '.PAR')
+                if len(fns) > 1:
+                    print(f"WARNING: found {len(fns)} files with pattern {code}.PAR for participant {participant}. Using first one...")
+                elif len(fns) == 0:
+                    print(f"ERROR: found NO files with pattern {code}.PAR for participant {participant}.")
+
+                fn = fns[0]
 
                 # open and read the protecolline needed for renaming
                 with open(fn, 'r') as f:
