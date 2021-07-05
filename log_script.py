@@ -13,8 +13,8 @@ root_dir = '/exports/fsw/Bendlab/SamenUniek'
 # /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab/SU33100901/ FSL_14_1
 raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
 bids_sessions = ['ses-w03lab', 'ses-w05lab']
-raw_sessions = ['MCC_ses05-lab']
-bids_sessions = ['ses-w05lab']
+# raw_sessions = ['MCC_ses05-lab']
+# bids_sessions = ['ses-w05lab']
 file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P']
 new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'Bzero_RS', 'Bzero_1', 'Bzero_2', 'DTIap', 'DTIpa', 'FSLnii', 'log']
 
@@ -25,14 +25,16 @@ for i, session in enumerate(raw_sessions):
     # Create log file
     participant_info_fn = os.path.join(root_dir, session + '_participant_info_extended.tsv')
     # If the text file already exists, delete it
-    # if os.path.isfile(participant_info_fn):
-    #     os.remove(participant_info_fn)
+    if os.path.isfile(participant_info_fn):
+        os.remove(participant_info_fn)
     
     cols = ['participant','nr_files'] + new_file_type
     df = pd.DataFrame(columns=cols)
     
     # Read directory names from raw data foler, write to text file
     for p, participant in enumerate(os.listdir(raw_data_dir)):
+        if p == 10:
+            break
         participant_dir = os.path.join(raw_data_dir, participant)
         first_b0_found = False
         fsl_found = False
@@ -53,10 +55,8 @@ for i, session in enumerate(raw_sessions):
                 if 'FSL' in code:
                     new_row[-2] = code
                     continue
-                
                 if code[0] == '0':
                     code = code[1:]
-
                 fns = glob.glob(os.path.join(participant_dir, '*_' + code + '.PAR'))
                 if len(fns) > 1:
                     new_row[-1] = f"WARNING: found {len(fns)} files with pattern {code}.PAR for participant {participant}. Using first one..."
@@ -65,9 +65,7 @@ for i, session in enumerate(raw_sessions):
                     new_row[-1] = f"ERROR: found NO files with pattern {code}.PAR for participant {participant}. Ignoring this file..."
                     print(new_row[-1])
                     continue
-
                 name = fns[0]
-
                 # open and read the protecolline needed for renaming
                 with open(name, 'r') as f:
                     protocolline = f.readlines()
@@ -96,12 +94,9 @@ for i, session in enumerate(raw_sessions):
                         print(new_row[-1])
                 else:
                     idx = file_type.index(match)
-                
                 new_row[idx+2] = code
-
             df_new_row = pd.DataFrame([new_row], columns=cols)
             df.append(df_new_row, ignore_index=True)
         else:
             print('Error: participant directory not found')
-
     df.to_csv(participant_info_fn, sep='\t')
