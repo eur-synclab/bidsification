@@ -13,6 +13,8 @@ root_dir = '/exports/fsw/Bendlab/SamenUniek'
 # /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab/SU33100901/ FSL_14_1
 raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
 bids_sessions = ['ses-w03lab', 'ses-w05lab']
+raw_sessions = ['MCC_ses05-lab']
+bids_sessions = ['ses-w05lab']
 file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P']
 new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'Bzero_RS', 'Bzero_1', 'Bzero_2', 'DTIap', 'DTIpa', 'FSLnii', 'log']
 
@@ -30,12 +32,12 @@ for i, session in enumerate(raw_sessions):
     df = pd.DataFrame(columns=cols)
     
     # Read directory names from raw data foler, write to text file
-    for participant in os.listdir(raw_data_dir):
+    for p, participant in enumerate(os.listdir(raw_data_dir)):
         participant_dir = os.path.join(raw_data_dir, participant)
         first_b0_found = False
         fsl_found = False
         if os.path.isdir(participant_dir):
-            print(participant)
+            print(f"{str(p).zfill(3)}: {participant}")
             all_files = [name for name in os.listdir(participant_dir) if os.path.isfile(os.path.join(participant_dir, name))]
             nr_files = len(all_files)
 
@@ -80,7 +82,7 @@ for i, session in enumerate(raw_sessions):
                         idx = 10
                     else:
                         idx = 11
-                        new_row[-1] += f"| NOTE: second B0 map found ({code}.PAR) for participant {participant}."
+                        new_row[-1] = new_row[-1] + f"| NOTE: second B0 map found ({code}.PAR) for participant {participant}."
                         print(new_row[-1])
                 else:
                     idx = file_type.index(match)
@@ -89,7 +91,7 @@ for i, session in enumerate(raw_sessions):
 
             df_new_row = pd.DataFrame([new_row], columns=cols)
             df.append(df_new_row, ignore_index=True)
-                    
-            df.to_csv(participant_info_fn, sep='\t')
         else:
             print('Error: participant directory not found')
+
+    df.to_csv(participant_info_fn, sep='\t')
