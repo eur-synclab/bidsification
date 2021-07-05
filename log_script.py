@@ -101,7 +101,7 @@ for i, session in enumerate(raw_sessions):
             df_new_row = pd.DataFrame([new_row], columns=cols)
             print('New row df:')
             print(df_new_row)
-            df.append(df_new_row, ignore_index=True)
+            df = df.append(df_new_row, ignore_index=True)
             print('New row df appended:')
             print(df)
         else:
