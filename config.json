@@ -12,7 +12,6 @@
     "T1w": "T1mri",
     "dwi": "DTI",
     "fieldmap": "fieldmaphz",
-    "magnitude": "mag",
     "T2w": "T2str"
   },
   "metadata": {
@@ -36,14 +35,19 @@
       "run": 3
     },
     "PCGex-run1": {
-      "id": "PCGe1",
+      "id": "PCG1",
       "task": "pcgex",
       "run": 1
     },
     "PCGex-run2": {
-      "id": "PCGe2",
+      "id": "PCG2",
       "task": "pcgex",
       "run": 2
+    },
+    "PCGex-run3": {
+      "id": "PCG3",
+      "task": "pcgex",
+      "run": 3
     },
     "task-rest": {
       "id": "rsfmr",
