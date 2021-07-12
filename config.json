@@ -11,7 +11,6 @@
     "bold": "bold",
     "T1w": "T1mri",
     "dwi": "DTI",
-    "fieldmap": "fieldmaphz",
     "T2w": "T2str"
   },
   "metadata": {
