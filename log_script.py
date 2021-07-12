@@ -11,6 +11,7 @@ from pathlib import Path
 
 root_dir = '/exports/fsw/Bendlab/SamenUniek'
 # /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab/SU33100901/ FSL_14_1
+# /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab/SU33110201/
 raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
 bids_sessions = ['ses-w03lab', 'ses-w05lab']
 # raw_sessions = ['MCC_ses05-lab']
