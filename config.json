@@ -11,8 +11,8 @@
     "bold": "bold",
     "T1w": "T1mri",
     "dwi": "DTI",
-    "phasediff": "Bzero",
-    "magnitude1": "",
+    "fieldmap": "fieldmaphz",
+    "magnitude": "mag",
     "T2w": "T2str"
   },
   "metadata": {
@@ -63,9 +63,22 @@
     }
   },
   "fmap": {
-    "B0": {
-      "id": "Bzero"
+    "B0_1": {
+      "id": "Bzero1",
+      "run": 1
+    },
+    "B0_2": {
+      "id": "Bzero2",
+      "run": 2
+    },
+    "B0_3": {
+      "id": "Bzero3",
+      "run": 3
+    },
+    "B0_RS": {
+      "id": "B0RS"
     }
+
   },
   "anat": {
     "T1": {

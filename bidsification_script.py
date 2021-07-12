@@ -119,6 +119,10 @@ for i, session in enumerate(raw_sessions):
 
 # bidsify -c bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_pseudobids -o /exports/fsw/Bendlab/SamenUniek/test_bidsification_nonmerge
 
+# bidsify -c /home/jsheunis/bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_MCC_ses03-lab/SU33000702/renamed_files -o /exports/fsw/Bendlab/SamenUniek/test_MCC_ses03-lab/SU33000702/bidsify_test
+
+# bidsify -c /home/jsheunis/bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_MCC_ses05-lab/SU35075901/renamed -o /exports/fsw/Bendlab/SamenUniek/test_MCC_ses05-lab/SU35075901/bidsify_test
+
 # -------------------------------------
 # STEP 4: rename T2w to T2star
 # -------------------------------------
