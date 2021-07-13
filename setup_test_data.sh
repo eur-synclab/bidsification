@@ -4,6 +4,7 @@ rm -R test_MCC_ses03-lab
 rm -R test_MCC_ses05-lab
 rm -R test_pseudobids
 rm -R test_bidsification
+rm -R test_bidsification_nonmerge
 
 mkdir test_MCC_ses03-lab && \
 mkdir test_MCC_ses05-lab && \
