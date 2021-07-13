@@ -122,7 +122,7 @@ for i, session in enumerate(raw_sessions):
                 if new_file_type[idx] in name:
                     print('WARNING: renamed file ' + name + ' already exists in the folder! This file will therefore be skipped!')
                 else:
-                    rename = name[:-4] + '_' + new_file_type[idx] + file[-4:]
+                    rename = name[:-4] + '_' + new_file_type[idx] + name[-4:]
                     os.rename(name, rename)
                     # Rename REC file, if it doesn't already exist
                     nameREC = name[:-4] + '.REC'
