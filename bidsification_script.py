@@ -3,6 +3,7 @@ import shutil
 import sys
 import glob
 from pathlib import Path
+import pandas as pd
 
 # -----------------
 # STEP 0: variables
