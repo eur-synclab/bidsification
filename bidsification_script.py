@@ -10,16 +10,14 @@ import pandas as pd
 # -----------------
 
 root_dir = '/exports/fsw/Bendlab/SamenUniek'
-raw_sessions = ['test_MCC_ses03-lab', 'test_MCC_ses05-lab']
+raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
 bids_sessions = ['ses-w03lab', 'ses-w05lab']
 file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P']
 new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'B0RS', 'Bzero1', 'Bzero2', 'Bzero3', 'DTIap', 'DTIpa', 'unknown_type', 'log']
 cols = ['participant','nr_files'] + new_file_type
-config_fn = 'bidsification/config.json'
-bids_dir = ''
 prefix = 'sub-mcc'
 # Create top-level pseudobids directory
-pseudobids_dir = os.path.join(root_dir, 'test_pseudobids')
+pseudobids_dir = os.path.join(root_dir, 'pseudobids')
 if not os.path.exists(pseudobids_dir):
     os.mkdir(pseudobids_dir)
 
@@ -46,7 +44,7 @@ for i, session in enumerate(raw_sessions):
         # Check in log-file if conversion has already been done.
         # If done, skip.
         if participant in df['participant'].tolist():
-            print(f"Participant {participant} already converted. Skipping...")
+            print(f"Participant {participant} already converted to pseudobids. Skipping...")
             continue
 
         # Access participant_dir, continue if it exists
@@ -154,17 +152,3 @@ for i, session in enumerate(raw_sessions):
             df.to_csv(conversion_log_fn)
         else:
             print('Error: participant directory not found for ' + participant)
-
-# -------------------------------------
-# STEP 3: run bidsify from command line
-# -------------------------------------
-
-# bidsify -c bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_pseudobids -o /exports/fsw/Bendlab/SamenUniek/test_bidsification_nonmerge
-
-# bidsify -c /home/jsheunis/bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_MCC_ses03-lab/SU33000702/renamed_files -o /exports/fsw/Bendlab/SamenUniek/test_MCC_ses03-lab/SU33000702/bidsify_test
-
-# bidsify -c /home/jsheunis/bidsification/config.json -d /exports/fsw/Bendlab/SamenUniek/test_MCC_ses05-lab/SU35075901/renamed -o /exports/fsw/Bendlab/SamenUniek/test_MCC_ses05-lab/SU35075901/bidsify_test
-# /exports/fsw/Bendlab/SamenUniek/test_MCC_ses05-lab/SU35075901/
-# -------------------------------------
-# STEP 4: rename T2w to T2star
-# -------------------------------------
