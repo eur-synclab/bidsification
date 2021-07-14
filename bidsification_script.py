@@ -36,7 +36,7 @@ for i, session in enumerate(raw_sessions):
     conversion_log_fn = os.path.join(root_dir, session + '_conversion_log.csv')
     # If the log file already exists, read contents into dataframe. If not, create dataframe.
     if os.path.isfile(conversion_log_fn):
-        df = pd.read_csv(conversion_log_fncsv)
+        df = pd.read_csv(conversion_log_fn)
     else:
         df = pd.DataFrame(columns=cols)
     
@@ -144,9 +144,9 @@ for i, session in enumerate(raw_sessions):
             session_dir = os.path.join(sub_dir, str(bids_sessions[i]))
             # Copy renamed raw data to pseudobids directory
             if os.path.exists(session_dir):
-                shutil.copy(participant_dir, session_dir)
+                shutil.copy2(participant_dir, session_dir) #this does not ignore FSL files, but letting that slide for now
             else:
-                shutil.copytree(participant_dir, session_dir)
+                shutil.copytree(participant_dir, session_dir, ignore=shutil.ignore_patterns('FSL*'))
 
             # Add participant info to log file
             df_new_row = pd.DataFrame([new_row], columns=cols)
@@ -154,7 +154,6 @@ for i, session in enumerate(raw_sessions):
             df.to_csv(conversion_log_fn)
         else:
             print('Error: participant directory not found for ' + participant)
-
 
 # -------------------------------------
 # STEP 3: run bidsify from command line
