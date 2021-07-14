@@ -65,10 +65,10 @@ pip install pandas
 
 *IMPORTANT: before running the code, coordinate with colleagues to see if they have already run parts of it, or if they're busy running parts of it*
 
-After installation/activatiom of the conda environment, navigate to the bidsification directory and ensure that the `main` branch is checked out:
+After installation/activatiom of the conda environment, navigate to the bidsification directory and ensure that the `master` branch is checked out:
 
 ```
-git checkout main
+git checkout master
 ```
 
 ### Step 2.1: run the main data setup script with python
