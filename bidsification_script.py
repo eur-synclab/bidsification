@@ -142,10 +142,10 @@ for i, session in enumerate(raw_sessions):
             session_dir = os.path.join(sub_dir, str(bids_sessions[i]))
             # Copy renamed raw data to pseudobids directory
             if os.path.exists(session_dir):
-                all_files_to_copy = [fn for fn in os.listdir(session_dir) if os.path.isfile(os.path.join(session_dir, fn))]
+                all_files_to_copy = [fn for fn in os.listdir(participant_dir) if os.path.isfile(os.path.join(participant_dir, fn))]
                 for file_to_copy in all_files_to_copy:
                     if not 'FSL' in file_to_copy:
-                        shutil.copy2(file_to_copy, session_dir)
+                        shutil.copy2(os.path.join(participant_dir, file_to_copy), session_dir)
             else:
                 shutil.copytree(participant_dir, session_dir, ignore=shutil.ignore_patterns('FSL*'))
 
