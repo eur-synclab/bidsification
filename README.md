@@ -74,7 +74,7 @@ git checkout master
 ### Step 2.1: run the main data setup script with python
 
 ```
-python /home/your-shark-username/bidsification/bidsification_script.py
+python /home/your-shark-username/bidsification/bidsification_script.py  2>&1 | tee bidsification_log_<unique-id>.txt
 ```
 
 If you are currently located in the cloned `bidsification` directory, you can exclude the `/home/your-shark-username/bidsification/` and run:

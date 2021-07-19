@@ -16,3 +16,5 @@ rsync -arv /exports/fsw/Bendlab/SamenUniek/MCC_ses05-lab/SU35000602 /exports/fsw
 rsync -arv /exports/fsw/Bendlab/SamenUniek/MCC_ses03-lab/SU33000601 /exports/fsw/Bendlab/SamenUniek/test_MCC_ses03-lab/ && \
 rsync -arv /exports/fsw/Bendlab/SamenUniek/SU31_bids/data/sub-mcc000702 /exports/fsw/Bendlab/SamenUniek/test_bidsification/ && \
 rsync -arv /exports/fsw/Bendlab/SamenUniek/SU31_bids/data/sub-mcc000601 /exports/fsw/Bendlab/SamenUniek/test_bidsification/
+
+python bidsification_script.py 2>&1 | tee bidsification_log_14Jul01.txt
