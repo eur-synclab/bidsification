@@ -10,12 +10,13 @@ import pandas as pd
 # -----------------
 
 root_dir = '/exports/fsw/Bendlab/SamenUniek'
-raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
-bids_sessions = ['ses-w03lab', 'ses-w05lab']
+raw_sessions = ['MCC_ses01']
+bids_sessions = ['ses-w01lab']
 file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P']
 new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'B0RS', 'Bzero1', 'Bzero2', 'Bzero3', 'DTIap', 'DTIpa', 'unknown_type', 'log']
 cols = ['participant','nr_files'] + new_file_type
 prefix = 'sub-mcc'
+conversion_log_dir = os.path.join(root_dir, 'conversion_logs')
 # Create top-level pseudobids directory
 pseudobids_dir = os.path.join(root_dir, 'pseudobids')
 if not os.path.exists(pseudobids_dir):
@@ -31,7 +32,7 @@ for i, session in enumerate(raw_sessions):
     print(raw_data_dir)
 
     # Log file
-    conversion_log_fn = os.path.join(root_dir, session + '_conversion_log.csv')
+    conversion_log_fn = os.path.join(conversion_log_dir, session + '_conversion_log.csv')
     # If the log file already exists, read contents into dataframe. If not, create dataframe.
     if os.path.isfile(conversion_log_fn):
         df = pd.read_csv(conversion_log_fn)
