@@ -9,10 +9,8 @@ from pathlib import Path
 # -----------------
 
 root_dir = '/exports/fsw/Bendlab/SamenUniek'
-# raw_sessions = ['MCC_ses03-lab', 'MCC_ses05-lab']
-# bids_sessions = ['ses-w03lab', 'ses-w05lab']
-raw_sessions = ['MCC_ses01-lab']
-bids_sessions = ['ses-w01lab']
+raw_sessions = ['MCC_ses01-lab', 'MCC_ses03-lab', 'MCC_ses05-lab']
+bids_sessions = ['ses-w01lab', 'ses-w03lab', 'ses-w05lab']
 file_type = ['3DT1', 'SNAT1', 'SNAT2', 'SNAT3', 'PCG1', 'PCG2', 'PCG3', 'rsfMRI', 'hires', 'B0-map_RS', 'B0-map', 'B0-map', 'B0-map', 'jones30_A', 'jones30_P']
 new_file_type = ['T1mri', 'bold_SNAT1', 'bold_SNAT2', 'bold_SNAT3', 'bold_PCG1', 'bold_PCG2', 'bold_PCG3', 'bold_rsfmr', 'T2str', 'B0RS', 'Bzero1', 'Bzero2', 'Bzero3', 'DTIap', 'DTIpa', 'unknown_type', 'log']
 cols = ['participant','nr_files'] + new_file_type
@@ -41,5 +39,5 @@ for p, participant in enumerate(participants):
                 if not os.path.isfile(json_fn):
                     participant_str = participant_str + f" | ERROR: no accompanying file {T2w_str}.json"
                 else:
-                    os.rename(nii_fn, json_fn.replace('_T2w', '_T2starw'))
+                    os.rename(json_fn, json_fn.replace('_T2w', '_T2starw'))
     print(participant_str)
